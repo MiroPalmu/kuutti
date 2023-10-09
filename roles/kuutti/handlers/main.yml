@@ -1,0 +1,47 @@
+---
+- name: Restart chronyd
+  listen: restart chronyd
+  ansible.builtin.service:
+    name: chronyd
+    state: restarted
+    enabled: true
+
+- name: Restart munge on headnode
+  listen: restart slurmctld
+  ansible.builtin.service:
+    name: munge
+    state: restarted
+    enabled: true
+
+- name: Restart munge on computenodes
+  listen: restart slurmd
+  ansible.builtin.service:
+    name: munge
+    state: restarted
+    enabled: true
+
+- name: Restart slurmctld
+  listen: restart slurmctld
+  ansible.builtin.service:
+    name: slurmctld
+    state: restarted
+    enabled: true
+
+- name: Restart slurmd
+  listen: restart slurmd
+  ansible.builtin.service:
+    name: slurmd
+    state: restarted
+    enabled: true
+
+- name: Finalize NFS config
+  listen: restart nfs-server
+  ansible.builtin.command: exportfs -a
+  changed_when: false
+
+- name: Restart nfs-server
+  listen: restart nfs-server
+  ansible.builtin.service:
+    name: nfs-server
+    state: restarted
+    enabled: true

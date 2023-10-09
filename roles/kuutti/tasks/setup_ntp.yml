@@ -1,0 +1,33 @@
+---
+- name: Install ntp package
+  ansible.builtin.dnf:
+    name:
+      - chrony
+    state: present
+
+- name: Setup headnode to be ntp server
+  notify: restart chronyd
+  ansible.builtin.blockinfile:
+    state: present
+    insertafter: EOF
+    dest: /etc/chrony.conf
+    content: |
+      local stratum 10
+      server {{ kuutti_head_server_ip }}
+      allow all
+  when: kuutti_provision == "head"
+
+- name: Setup ntp server to be headnode
+  notify: restart chronyd
+  ansible.builtin.import_role:
+    name: geerlingguy.ntp
+  vars:
+    ntp_enabled: true
+    ntp_timezone: Europe/Helsinki
+    ntp_package: chrony
+    ntp_daemon: chronyd
+    ntp_config_file: /etc/chrony.conf
+    ntp_servers:
+      - "{{ kuutti_head_server_ip }} iburst"
+    ntp_cron_handler_enabled: true
+  when: kuutti_provision == "compute"

@@ -1,0 +1,76 @@
+---
+- name: Make sure we have a 'wheel' group
+  ansible.builtin.group:
+    name: wheel
+    state: present
+  when: kuutti_provision == "head"
+
+- name: Allow 'wheel' group to have passwordless sudo
+  ansible.builtin.lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: ^%wheel
+    line: "%wheel ALL=(ALL) NOPASSWD: ALL"
+    validate: visudo -cf %s
+  when: kuutti_provision == "head"
+
+- name: Add users
+  ansible.builtin.user:
+    user: "{{ item }}"
+    state: present
+    groups: wheel
+    create_home: true
+    generate_ssh_key: true
+  loop: "{{ kuutti_users }}"
+  when: kuutti_provision == "head"
+
+- name: Add authorized keys to users
+  ansible.posix.authorized_key:
+    user: "{{ item }}"
+    state: present
+    exclusive: true
+    # users and kuutti_path_to_user_public_keys are required
+    key: "{{ lookup('file', '{{ kuutti_path_to_user_public_keys }}/{{ item }}.pub') }}"
+  loop: "{{ kuutti_users }}"
+  when: kuutti_provision == "head"
+
+- name: Make /home/* readable by everyone
+  ansible.builtin.shell: set -o pipefail && find /home -mindepth 1 -maxdepth 1 -type d | xargs chmod a+rx
+  changed_when: false
+  when: kuutti_provision == "head"
+
+# Following sync of /etc/passwd and /etc/group assumes
+# that kuutti_admin_user is the same for headnode and computenodes
+# and that nfs is working and home/admin_user is mounted correctly
+
+- name: Copy /etc/passwd to be synced with computenodes
+  ansible.builtin.copy:
+    src: /etc/passwd
+    dest: /home/{{ kuutti_admin_user }}/passwd
+    mode: preserve
+    remote_src: true
+  when: kuutti_provision == "head"
+
+- name: Copy /etc/group to be synced with computenodes
+  ansible.builtin.copy:
+    src: /etc/group
+    dest: /home/{{ kuutti_admin_user }}/group
+    mode: preserve
+    remote_src: true
+  when: kuutti_provision == "head"
+
+- name: Sync /etc/passwd from hostnode
+  ansible.builtin.copy:
+    src: /home/{{ kuutti_admin_user }}/passwd
+    dest: /etc/passwd
+    mode: preserve
+    remote_src: true
+  when: kuutti_provision == "compute"
+
+- name: Sync /etc/group from hostnode
+  ansible.builtin.copy:
+    src: /home/{{ kuutti_admin_user }}/group
+    dest: /etc/group
+    mode: preserve
+    remote_src: true
+  when: kuutti_provision == "compute"

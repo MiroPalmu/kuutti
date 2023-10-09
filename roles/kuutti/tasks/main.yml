@@ -1,0 +1,45 @@
+---
+- name: Check and initialize variables
+  ansible.builtin.import_tasks: check_and_init_variables.yml
+
+- name: Setup ntp
+  ansible.builtin.import_tasks: setup_ntp.yml
+
+- name: Add IP address of all hosts to all hosts
+  ansible.builtin.lineinfile:
+    dest: /etc/hosts
+    regexp: .*{{ item }}$
+    line: "{{ hostvars[item].ansible_host }} {{ item }}"
+    state: present
+  when: hostvars[item].ansible_host is defined
+  with_items:
+    - "{{ groups['compute_servers'] }}"
+    - "{{ groups['login_server'] }}"
+
+- name: Setup nfs
+  ansible.builtin.import_tasks: setup_nfs.yml
+
+- name: Enable required repositories
+  ansible.builtin.import_tasks: enable_repositories.yml
+
+- name: Install headnode packages
+  ansible.builtin.import_tasks: install_headnode_packages.yml
+  when: kuutti_provision == "head"
+
+- name: Setup users
+  ansible.builtin.import_tasks: setup_users.yml
+
+- name: Install computenode packages
+  ansible.builtin.import_tasks: install_computenode_packages.yml
+  when: kuutti_provision == "compute"
+
+- name: Setup munge key
+  ansible.builtin.import_tasks: setup_munge.yml
+
+- name: Increase memlock
+  ansible.builtin.blockinfile:
+    path: /etc/security/limits.conf
+    insertbefore: EOF
+    block: |
+      * soft memlock unlimited
+      * hard memlock unlimited

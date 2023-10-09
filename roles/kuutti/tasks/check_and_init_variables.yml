@@ -1,0 +1,51 @@
+---
+- name: Make sure required variables are defined
+  ansible.builtin.fail:
+    msg: Required variable {{ item }} has not been provided. If not defined in role defaults .../kuutti_cluster/defaults it has to be given!
+  when: vars[item] is undefined
+  loop:
+    - kuutti_provision
+    - kuutti_headnode_hostname
+    - kuutti_computenode_common_hostname_prefix
+    - kuutti_computenode_sockets
+    - kuutti_computenode_cores_per_socket
+    - kuutti_computenode_threads_per_core
+    - kuutti_users
+    - kuutti_path_to_user_public_keys
+    - kuutti_cluster_network_cidr
+    - kuutti_openhpc_repository_url
+    - kuutti_cluster_name
+    - kuutti_max_task_time
+    - kuutti_partition_name
+    - kuutti_enable_omni_path_support
+    - kuutti_dev_tools
+    - kuutti_compiler_and_mpi_packages
+    - kuutti_default_env
+
+- name: Make sure required host groups are defined
+  ansible.builtin.fail:
+    msg: Required host groups in inventory are login_server and compute_servers! {{ item }} is missing from {{ groups }}
+  when: item not in groups
+  loop:
+    - login_server
+    - compute_servers
+
+- name: Make sure there is only one headnode
+  ansible.builtin.fail:
+    msg: There should only be one head_server
+  when: groups['login_server'] | length | int != 1
+
+- name: Make sure there is at least one computenode
+  ansible.builtin.fail:
+    msg: There should only be one head_server
+  when: groups['compute_servers'] | length | int == 0
+
+- name: Store head_server ip
+  ansible.builtin.set_fact:
+    kuutti_head_server_ip: "{{ hostvars[item].ansible_host }}"
+  with_items:
+    - "{{ groups['login_server'] }}"
+
+- name: Store ansible_ssh_use to kuutti_admin_user
+  ansible.builtin.set_fact:
+    kuutti_admin_user: "{{ ansible_ssh_user }}"

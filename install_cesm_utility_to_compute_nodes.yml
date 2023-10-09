@@ -1,0 +1,16 @@
+---
+- hosts: compute_servers
+  name: Install CESM dependencies on compute nodes
+  become: true
+
+  tasks:
+    - name: Install cpanminus
+      ansible.builtin.dnf:
+        name: cpanminus
+        state: present
+    - name: Install perl big int
+      community.general.cpanm:
+        name: bigint
+    - name: Install perl xml
+      community.general.cpanm:
+        name: XML::LibXML

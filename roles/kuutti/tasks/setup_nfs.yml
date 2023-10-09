@@ -1,0 +1,49 @@
+---
+- name: Set exports
+  ansible.builtin.import_role:
+    name: geerlingguy.nfs
+  vars:
+    nfs_exports:
+      - /home {{ kuutti_cluster_network_cidr }}(rw,no_subtree_check,no_root_squash)
+      - /opt/ohpc/pub {{ kuutti_cluster_network_cidr }}(ro,no_subtree_check)
+  when: kuutti_provision == "head"
+  notify: restart nfs-server
+
+# Intel builds are not supported atm
+
+# - name: Set exports
+#   ansible.builtin.import_role:
+#     name: geerlingguy.nfs
+#   vars:
+#     nfs_exports:
+#       - /home {{ kuutti_cluster_network_cidr }}(rw,no_subtree_check,no_root_squash)
+#       - /opt/ohpc/pub {{ kuutti_cluster_network_cidr }}(ro,no_subtree_check)
+#       - /opt/ohpc/intel {{ kuutti_cluster_network_cidr }}(ro,no_subtree_check)
+#   when: kuutti_provision == "head" and kuutti_install_intel
+#   notify: restart nfs-server
+
+- name: Mount /home
+  ansible.posix.mount:
+    path: /home
+    src: "{{ groups['login_server'][0] }}:/home"
+    fstype: nfs
+    opts: defaults
+    state: mounted
+  when: kuutti_provision == "compute"
+
+- name: Mount /opt/ohpc/pub
+  ansible.posix.mount:
+    path: /opt/ohpc/pub
+    src: "{{ groups['login_server'][0] }}:/opt/ohpc/pub"
+    fstype: nfs
+    opts: defaults
+    state: mounted
+  when: kuutti_provision == "compute"
+
+# - name: Mount /opt/intel
+#   ansible.posix.mount:
+#     path: /opt/intel
+#     src: "{{ groups['login_server'][0] }}:/opt/intel"
+#     fstype: nfs
+#     opts: defaults
+#   when: kuutti_provision == "compute" and kuutti_install_intel

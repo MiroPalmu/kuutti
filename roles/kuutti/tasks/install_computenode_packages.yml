@@ -1,0 +1,24 @@
+---
+- name: Install OpenHPC computenode packages
+  ansible.builtin.dnf:
+    name:
+      - ohpc-base-compute
+      - ohpc-slurm-client
+      - lmod-ohpc
+    state: present
+  notify: restart slurmd
+
+- name: Register Slurm server (using configless option)
+  ansible.builtin.copy:
+    dest: /etc/sysconfig/slurmd
+    content: SLURMD_OPTIONS=--conf-server {{ kuutti_headnode_hostname }}
+    mode: "0644"
+  notify: restart slurmd
+
+- name: Install packages for Omni-Path on computenodes
+  ansible.builtin.dnf:
+    name:
+      - opa-basic-tools
+      - libpsm2
+    state: present
+  when: kuutti_enable_omni_path_support

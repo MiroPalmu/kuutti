@@ -1,0 +1,37 @@
+---
+# Meta:
+# What is potentially missing:
+#   * Perftools
+
+- name: Install OpenHPC headnode packages
+  ansible.builtin.dnf:
+    name:
+      - ohpc-base
+      - ohpc-slurm-server
+    state: present
+
+- name: Configure Slurm
+  ansible.builtin.import_tasks: configure_slurm.yml
+
+- name: Install packages for Omni-Path on headnode
+  ansible.builtin.dnf:
+    name:
+      - opa-basic-tools
+    state: present
+  when: kuutti_enable_omni_path_support
+
+- name: Install development tools
+  ansible.builtin.dnf:
+    name: "{{ kuutti_dev_tools }}"
+    state: present
+
+- name: Install compilers and mpi packages
+  ansible.builtin.dnf:
+    name: "{{ kuutti_compiler_and_mpi_packages }}"
+    state: present
+
+- name: Install default enviroment
+  ansible.builtin.dnf:
+    name:
+      - lmod-defaults-{{ kuutti_default_env }}-ohpc
+    state: present

@@ -1,0 +1,30 @@
+---
+# Slurm properties
+kuutti_cluster_name: kuutti
+kuutti_partition_name: batch
+kuutti_max_task_time: "24:00:00"
+
+kuutti_enable_omni_path_support: true
+kuutti_default_env: gnu12-mvapich2
+kuutti_dev_tools:
+  - ohpc-autotools
+  - hwloc-ohpc
+  - valgrind-ohpc
+  - cmake-ohpc
+  - libtool-ohpc
+  - spack-ohpc
+  - EasyBuild-ohpc
+  - test-suite-ohpc
+kuutti_compiler_and_mpi_packages:
+  - gnu12-compilers-ohpc
+  - mvapich2-psm2-gnu12-ohpc
+  - openmpi4-gnu12-ohpc
+  - ohpc-gnu12-mvapich2-parallel-libs
+  - ohpc-gnu12-serial-libs
+  - ohpc-gnu12-io-libs
+  - ohpc-gnu12-python-libs
+  - ohpc-gnu12-runtimes
+
+kuutti_openhpc_repository_url: http://repos.openhpc.community/OpenHPC/2/EL_8/x86_64/ohpc-release-2-1.el8.x86_64.rpm
+
+kuutti_cluster_network_cidr: 10.0.0.0/24

@@ -1,0 +1,20 @@
+---
+# These could be template
+
+- name: Copy slurm.conf
+  notify: restart slurmctld
+  ansible.builtin.template:
+    src: slurm.conf.j2
+    dest: /etc/slurm/slurm.conf
+    mode: "0644"
+    owner: slurm
+    group: slurm
+
+- name: Copy cgroup.slurm.conf
+  notify: restart slurmctld
+  ansible.builtin.template:
+    src: cgroup.conf.j2
+    dest: /etc/slurm/cgroup.conf
+    mode: "0644"
+    owner: slurm
+    group: slurm

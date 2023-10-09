@@ -1,0 +1,25 @@
+---
+# Following sync of /etc/munge/munge.key assumes
+# that kuutti_admin_user is the same for headnode and computenodes
+# and that nfs is working and home/admin_user is mounted correctly
+
+# Here potentially munge key has to created but
+# atm assume OpenHPC takes care of it
+
+- name: Copy /etc/munge/munge.key to be synced with computenodes
+  ansible.builtin.copy:
+    src: /etc/munge/munge.key
+    dest: /home/{{ kuutti_admin_user }}/munge.key
+    mode: preserve
+    remote_src: true
+  when: kuutti_provision == "head"
+
+- name: Sync /etc/munge/munge.key to computenodes
+  ansible.builtin.copy:
+    dest: /etc/munge/munge.key
+    src: /home/{{ kuutti_admin_user }}/munge.key
+    mode: preserve
+    owner: munge
+    group: munge
+    remote_src: true
+  when: kuutti_provision == "compute"
