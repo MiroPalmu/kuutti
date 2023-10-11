@@ -36,7 +36,7 @@ kuutti_path_to_user_public_keys: /home/cc/kuutti2/public_keys
 #  - spack-ohpc
 #  - EasyBuild-ohpc
 #  - test-suite-ohpc
-#kuutti_compiler_and_mpi_packages:
+#kuutti_ohpc_packages:
 #  - gnu12-compilers-ohpc
 #  - mvapich2-psm2-gnu12-ohpc
 #  - openmpi4-gnu12-ohpc

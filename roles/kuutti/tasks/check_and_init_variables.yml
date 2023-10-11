@@ -19,7 +19,7 @@
     - kuutti_partition_name
     - kuutti_enable_omni_path_support
     - kuutti_dev_tools
-    - kuutti_compiler_and_mpi_packages
+    - kuutti_ohpc_packages
     - kuutti_default_env
 
 - name: Make sure required host groups are defined

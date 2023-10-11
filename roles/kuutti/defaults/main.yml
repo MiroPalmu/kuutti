@@ -15,11 +15,12 @@ kuutti_dev_tools:
   - spack-ohpc
   - EasyBuild-ohpc
   - test-suite-ohpc
-kuutti_compiler_and_mpi_packages:
+kuutti_ohpc_packages:
   - gnu12-compilers-ohpc
   - mvapich2-psm2-gnu12-ohpc
   - openmpi4-gnu12-ohpc
   - ohpc-gnu12-mvapich2-parallel-libs
+  - ohpc-gnu12-openmpi4-parallel-libs
   - ohpc-gnu12-serial-libs
   - ohpc-gnu12-io-libs
   - ohpc-gnu12-python-libs

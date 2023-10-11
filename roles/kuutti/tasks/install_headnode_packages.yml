@@ -25,9 +25,9 @@
     name: "{{ kuutti_dev_tools }}"
     state: present
 
-- name: Install compilers and mpi packages
+- name: Install OpenHPC packages
   ansible.builtin.dnf:
-    name: "{{ kuutti_compiler_and_mpi_packages }}"
+    name: "{{ kuutti_ohpc_packages }}"
     state: present
 
 - name: Install default enviroment
