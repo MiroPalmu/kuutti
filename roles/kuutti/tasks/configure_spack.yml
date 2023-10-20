@@ -1,0 +1,12 @@
+---
+- name: Create /etc/spack
+  ansible.builtin.file:
+    path: /etc/spack
+    state: directory
+    mode: "0644"
+
+- name: Configure spack
+  ansible.builtin.template:
+    src: modules.yaml.j2
+    dest: /etc/spack/modules.yaml
+    mode: "0644"

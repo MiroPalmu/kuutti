@@ -35,3 +35,7 @@
     name:
       - lmod-defaults-{{ kuutti_default_env }}-ohpc
     state: present
+
+- name: Configure Slurm
+  ansible.builtin.import_tasks: configure_slurm.yml
+  when: kuutti_configure_spack

@@ -6,6 +6,7 @@ kuutti_max_task_time: "24:00:00"
 
 kuutti_enable_omni_path_support: true
 kuutti_default_env: gnu12-mvapich2
+kuutti_configure_spack: true
 kuutti_dev_tools:
   - ohpc-autotools
   - hwloc-ohpc
