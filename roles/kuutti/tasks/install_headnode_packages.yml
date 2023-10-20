@@ -20,6 +20,12 @@
     state: present
   when: kuutti_enable_omni_path_support
 
+- name: Enable Intel oneAPI
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+  when: kuutti_enable_intel
+
 - name: Install development tools
   ansible.builtin.dnf:
     name: "{{ kuutti_dev_tools }}"

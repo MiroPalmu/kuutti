@@ -23,6 +23,7 @@
     - kuutti_default_env
     - kuutti_configure_spack
     - kuutti_common_packages
+    - kuutti_enable_intel
 
 - name: Make sure required host groups are defined
   ansible.builtin.fail:
