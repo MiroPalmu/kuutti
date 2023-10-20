@@ -25,6 +25,11 @@
     name: "{{ kuutti_dev_tools }}"
     state: present
 
+- name: Install common packages on headnode
+  ansible.builtin.dnf:
+    name: "{{ kuutti_common_packages }}"
+    state: present
+
 - name: Install OpenHPC packages
   ansible.builtin.dnf:
     name: "{{ kuutti_ohpc_packages }}"

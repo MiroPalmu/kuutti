@@ -22,6 +22,7 @@
     - kuutti_ohpc_packages
     - kuutti_default_env
     - kuutti_configure_spack
+    - kuutti_common_packages
 
 - name: Make sure required host groups are defined
   ansible.builtin.fail:

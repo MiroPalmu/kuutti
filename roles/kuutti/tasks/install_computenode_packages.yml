@@ -8,6 +8,11 @@
     state: present
   notify: restart slurmd
 
+- name: Install common packages on computenode
+  ansible.builtin.dnf:
+    name: "{{ kuutti_common_packages }}"
+    state: present
+
 - name: Register Slurm server (using configless option)
   ansible.builtin.copy:
     dest: /etc/sysconfig/slurmd
