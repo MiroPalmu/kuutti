@@ -1,3 +1,5 @@
+# Provision instructions
+
 Assume that headnode and compute nodes are created, st. compute nodes are accessible from headnode. See step 5) for naming.
 
 Sometimes during first run of playbook there is problems with `/bin/python` no being found. Just run the playbook again and it shloud fix itself.
@@ -40,8 +42,7 @@ ansible-galaxy collection install -r requirements.yml
 ANSIBLE_REMOTE_TMP=/tmp ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.yml provision_computenodes.yml
 ```
 
-# Removed stes (only for historic purposes)
-
+# Removed steps (only for historic purposes)
 
 - save floating ip of loging node as FLOATING_IP
 - save the public key of loging node as LOGIN_PUB
