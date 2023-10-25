@@ -27,9 +27,9 @@ kuutti_path_to_user_public_keys: /home/cc/kuutti/public_keys
 # run of the playbook! Changing it will result in error!
 
 #kuutti_enable_omni_path_support: false
-#kuutti_default_env: gnu12-mvapich2
+kuutti_default_env: gnu12-mpich-ucx
 #kuutti_configure_spack: true
-#kuutti_enable_intel: false
+kuutti_enable_intel: true
 #kuutti_dev_tools:
 #  - ohpc-autotools
 #  - hwloc-ohpc
@@ -39,14 +39,41 @@ kuutti_path_to_user_public_keys: /home/cc/kuutti/public_keys
 #  - spack-ohpc
 #  - EasyBuild-ohpc
 #  - test-suite-ohpc
-#kuutti_ohpc_packages:
-#  - gnu12-compilers-ohpc
-#  - mvapich2-psm2-gnu12-ohpc
-#  - ohpc-gnu12-mvapich2-parallel-libs
-#  - ohpc-gnu12-serial-libs
-#  - ohpc-gnu12-io-libs
-#  - ohpc-gnu12-python-libs
-#  - ohpc-gnu12-runtimes
+kuutti_ohpc_packages:
+# gnu12
+  - gnu12-compilers-ohpc
+# gnu12 mpich-ucx
+  - mpich-ucx-gnu12-ohpc
+  - ohpc-gnu12-mpich-ucx-parallel-libs
+# gnu12 mpich-ofi
+  - mpich-ofi-gnu12-ohpc
+  - ohpc-gnu12-mpich-ofi-parallel-libs
+# gnu12 iolibs
+  - ohpc-gnu12-io-libs
+  - ohpc-gnu12-mpich-io-libs
+# gnu12 packages:
+  - ohpc-gnu12-serial-libs
+  - ohpc-gnu12-python-libs
+  - ohpc-gnu12-python3-libs
+  - ohpc-gnu12-runtimes
+
+# intel compilers
+  - intel-compilers-devel-ohpc
+# intel intel-mpi
+  - intel-mpi-devel-ohpc
+  - ohpc-intel-impi-parallel
+# intel mpich-ofi
+  - mpich-ofi-intel-ohpc
+  - ohpc-intel-mpich-parallel-libs
+# intel iolibs
+  - ohpc-intel-io-libs
+  - ohpc-intel-impi-io-libs
+  - ohpc-intel-mpich-io-libs
+# intel packages:
+  - ohpc-intel-serial-libs
+  - ohpc-intel-python3-libs
+  - ohpc-intel-runtimes
+
 ## Installed on all nodes
 #kuutti_common_packages:
 #  - python3.11
