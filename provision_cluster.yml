@@ -1,6 +1,6 @@
 ---
-- hosts: login_server
-  name: Provision headnode
+- name: Provision headnode
+  hosts: login_server
   become: true
   vars_files:
     - ./vars/main.yml
@@ -8,11 +8,12 @@
     - role: kuutti
       kuutti_provision: head
 
-- hosts: compute_servers
-  name: Provision computenodes
+- name: Provision computenodes
+  hosts: compute_servers
   become: true
   vars_files:
     - ./vars/main.yml
   roles:
     - role: kuutti
       kuutti_provision: compute
+...
