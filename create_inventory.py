@@ -7,8 +7,8 @@ import sys
 chi.set('project_id', '9a85895b81ee42b09a13d980690f2390')
 chi.use_site('CHI@UC')    #Set which site to use
 
-login_server_ip = "10.0.0.234"
-common_compute_server_prefix = "kuutti2-compute"
+login_server_ip = "10.140.82.129"
+common_server_prefix = "kuutti"
 
 # Check for ports open
 all_ports = chi.network.list_ports()
@@ -28,7 +28,7 @@ def clean_server_name(server: str):
 for x in all_ports:
     try:
         instance_name = clean_server_name(str(chi.server.get_server(x['device_id'])))
-        if common_compute_server_prefix not in instance_name:
+        if common_server_prefix not in instance_name:
             continue
         ip_settings = x['fixed_ips']
         static_ip = ip_settings[0]['ip_address']
