@@ -30,7 +30,7 @@ kuutti_common_packages:
   - python3.11
   - python3.11-devel
   - vim
-  - nvim
+  - neovim
 
 kuutti_openhpc_repository_url: http://repos.openhpc.community/OpenHPC/2/EL_8/x86_64/ohpc-release-2-1.el8.x86_64.rpm
 
