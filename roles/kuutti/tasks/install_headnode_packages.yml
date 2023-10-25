@@ -20,7 +20,14 @@
     state: present
   when: kuutti_enable_omni_path_support
 
-- name: Enable Intel oneAPI
+- name: Setup Intel oneAPI HPC repository
+  ansible.builtin.dnf:
+    name:
+      - intel-oneapi-toolkit-release-ohpc
+    state: present
+  when: kuutti_enable_intel
+
+- name: Add Intel RPM key
   ansible.builtin.rpm_key:
     state: present
     key: https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
