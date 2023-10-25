@@ -1,6 +1,6 @@
 ---
-kuutti_headnode_hostname: kuutti2-login
-kuutti_computenode_common_hostname_prefix: kuutti2-compute-
+kuutti_headnode_hostname: kuutti-login
+kuutti_computenode_common_hostname_prefix: kuutti-compute-
 kuutti_computenode_sockets: 2
 kuutti_computenode_cores_per_socket: 12
 kuutti_computenode_threads_per_core: 1
@@ -14,7 +14,7 @@ kuutti_users:
   - valorinta
   - jenkovaa
 
-kuutti_path_to_user_public_keys: /home/cc/kuutti2/public_keys
+kuutti_path_to_user_public_keys: /home/cc/kuutti/public_keys
 
 # These are defaults from roles/kuutti/defaults/main.yml
 # They control which libraries, compilers and mpi families are installed.
