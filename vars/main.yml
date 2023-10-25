@@ -12,6 +12,7 @@ kuutti_users:
   - saana
   - simo
   - valorinta
+  - jenkovaa
 
 kuutti_path_to_user_public_keys: /home/cc/kuutti2/public_keys
 
