@@ -44,10 +44,10 @@ kuutti_ohpc_packages:
   - gnu12-compilers-ohpc
 # gnu12 mpich-ucx
   - mpich-ucx-gnu12-ohpc
-  - ohpc-gnu12-mpich-ucx-parallel-libs
 # gnu12 mpich-ofi
   - mpich-ofi-gnu12-ohpc
-  - ohpc-gnu12-mpich-ofi-parallel-libs
+# gnu12 parallel libs
+  - ohpc-gnu12-mpich-parallel-libs
 # gnu12 iolibs
   - ohpc-gnu12-io-libs
   - ohpc-gnu12-mpich-io-libs
@@ -61,9 +61,10 @@ kuutti_ohpc_packages:
   - intel-compilers-devel-ohpc
 # intel intel-mpi
   - intel-mpi-devel-ohpc
-  - ohpc-intel-impi-parallel
 # intel mpich-ofi
   - mpich-ofi-intel-ohpc
+# intel parallel libs
+  - ohpc-intel-impi-parallel-libs
   - ohpc-intel-mpich-parallel-libs
 # intel iolibs
   - ohpc-intel-io-libs
