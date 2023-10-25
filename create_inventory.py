@@ -7,7 +7,7 @@ import sys
 chi.set('project_id', '9a85895b81ee42b09a13d980690f2390')
 chi.use_site('CHI@UC')    #Set which site to use
 
-login_server_ip = "10.140.82.129"
+login_server_ip = "10.140.81.60"
 common_server_prefix = "kuutti"
 
 # Check for ports open
