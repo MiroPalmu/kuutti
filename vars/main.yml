@@ -23,11 +23,12 @@ kuutti_path_to_user_public_keys: /home/cc/kuutti2/public_keys
 #
 # Everything else can be changed freely and installed by running provision_cluster.yml
 # but kuutti_default_env can not be changed from the one that it was on the first
-# run of the playbook! Changing it will result in failing provision_cluster.yml
+# run of the playbook! Changing it will result in error!
 
-kuutti_enable_omni_path_support: false
-kuutti_default_env: gnu12-mpich-ucx
+#kuutti_enable_omni_path_support: false
+#kuutti_default_env: gnu12-mvapich2
 #kuutti_configure_spack: true
+#kuutti_enable_intel: false
 #kuutti_dev_tools:
 #  - ohpc-autotools
 #  - hwloc-ohpc
@@ -37,12 +38,18 @@ kuutti_default_env: gnu12-mpich-ucx
 #  - spack-ohpc
 #  - EasyBuild-ohpc
 #  - test-suite-ohpc
-kuutti_ohpc_packages:
-  - gnu12-compilers-ohpc
-  - mpich-ucx-gnu12-ohpc
-  - ohpc-gnu12-mpich-parallel-libs
-  - ohpc-gnu12-serial-libs
-  - ohpc-gnu12-io-libs
-  - ohpc-gnu12-python-libs
-  - ohpc-gnu12-runtimes
+#kuutti_ohpc_packages:
+#  - gnu12-compilers-ohpc
+#  - mvapich2-psm2-gnu12-ohpc
+#  - ohpc-gnu12-mvapich2-parallel-libs
+#  - ohpc-gnu12-serial-libs
+#  - ohpc-gnu12-io-libs
+#  - ohpc-gnu12-python-libs
+#  - ohpc-gnu12-runtimes
+## Installed on all nodes
+#kuutti_common_packages:
+#  - python3.11
+#  - python3.11-devel
+#  - vim
+#  - nvim
 ...
