@@ -39,7 +39,7 @@ ansible-galaxy collection install -r requirements.yml
 )
 
 ```
-ANSIBLE_REMOTE_TMP=/tmp ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.yml provision_computenodes.yml
+ANSIBLE_REMOTE_TMP=/tmp ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.yml provision_cluster.yml
 ```
 
 # Removed steps (only for historic purposes)
