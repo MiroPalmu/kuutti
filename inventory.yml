@@ -1,8 +1,8 @@
 [login_server]
-kuutti-login ansible_host=10.140.81.60 ansible_user=cc
+kuutti-login ansible_host=10.140.83.107 ansible_user=cc
 
 [compute_servers]
-kuutti-compute-1 ansible_host=10.140.81.219 ansible_user=cc
-kuutti-compute-3 ansible_host=10.140.82.243 ansible_user=cc
-kuutti-compute-2 ansible_host=10.140.83.140 ansible_user=cc
-kuutti-compute-4 ansible_host=10.140.82.159 ansible_user=cc
+kuutti-compute-1 ansible_host=10.140.83.186 ansible_user=cc
+kuutti-compute-3 ansible_host=10.140.81.201 ansible_user=cc
+kuutti-compute-4 ansible_host=10.140.82.96 ansible_user=cc
+kuutti-compute-2 ansible_host=10.140.83.112 ansible_user=cc
