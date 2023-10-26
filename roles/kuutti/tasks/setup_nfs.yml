@@ -16,7 +16,7 @@
     nfs_exports:
       - /home {{ kuutti_cluster_network_cidr }}(rw,no_subtree_check,no_root_squash)
       - /opt/ohpc/pub {{ kuutti_cluster_network_cidr }}(ro,no_subtree_check)
-      - /opt/ohpc/intel {{ kuutti_cluster_network_cidr }}(ro,no_subtree_check)
+      - /opt/intel {{ kuutti_cluster_network_cidr }}(ro,no_subtree_check)
   when: kuutti_provision == "head" and kuutti_enable_intel
   notify: restart nfs-server
 

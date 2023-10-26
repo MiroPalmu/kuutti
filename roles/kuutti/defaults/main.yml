@@ -34,4 +34,4 @@ kuutti_common_packages:
 
 kuutti_openhpc_repository_url: http://repos.openhpc.community/OpenHPC/2/EL_8/x86_64/ohpc-release-2-1.el8.x86_64.rpm
 
-kuutti_cluster_network_cidr: 10.0.0.0/24
+kuutti_cluster_network_cidr: '*'
