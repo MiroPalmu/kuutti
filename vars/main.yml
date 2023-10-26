@@ -55,7 +55,6 @@ kuutti_ohpc_packages:
   - ohpc-gnu12-serial-libs
   - ohpc-gnu12-python-libs
   - ohpc-gnu12-python3-libs
-  - ohpc-gnu12-runtimes
 
 # intel compilers
   - intel-compilers-devel-ohpc
@@ -64,8 +63,11 @@ kuutti_ohpc_packages:
 # intel mpich-ofi
   - mpich-ofi-intel-ohpc
 # intel parallel libs
-  - ohpc-intel-impi-parallel-libs
-  - ohpc-intel-mpich-parallel-libs
+#   For some reason intel trilinnos ohpc
+#   packages are missing from ohpc 3,
+#   so these meta-packages will fail
+#  - ohpc-intel-impi-parallel-libs
+# - ohpc-intel-mpich-parallel-libs
 # intel iolibs
   - ohpc-intel-io-libs
   - ohpc-intel-impi-io-libs
@@ -73,7 +75,6 @@ kuutti_ohpc_packages:
 # intel packages:
   - ohpc-intel-serial-libs
   - ohpc-intel-python3-libs
-  - ohpc-intel-runtimes
 
 ## Installed on all nodes
 #kuutti_common_packages:
