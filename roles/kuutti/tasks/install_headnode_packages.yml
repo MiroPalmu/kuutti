@@ -33,6 +33,12 @@
     key: https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
   when: kuutti_enable_intel
 
+- name: Add Intel 2023 RPM key
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB
+  when: kuutti_enable_intel
+
 - name: Install development tools
   ansible.builtin.dnf:
     name: "{{ kuutti_dev_tools }}"
