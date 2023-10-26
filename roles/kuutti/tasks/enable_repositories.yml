@@ -5,13 +5,13 @@
     disable_gpg_check: true
     state: present
 
-- name: Install DNF-Plugin-Core and EPEL-Release
+- name: Enable DNF-Plugin-Core and EPEL-Release
   ansible.builtin.dnf:
     name:
       - epel-release
       - dnf-plugins-core
     state: present
 
-- name: Enable powertools repository
-  ansible.builtin.command: dnf config-manager --set-enabled powertools
+- name: Enable Code Ready Repository
+  ansible.builtin.command: dnf config-manager --set-enabled crb
   changed_when: false
